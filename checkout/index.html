@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopspsps</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="styles.css">
+	<link rel="icon" href="../icons/gato.svg">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header">
+			<div id="filter">
+				<button onclick="filtervisibility()"><img src="../icons/filter.png"></button>
+			</div>
+
+			<a id="logo" href="../index.html">
+				<img src="../icons/gato.png">
+				<p>Shopspsps</p>
+			</a>
+		</div>
+
+		<div id="menu" class="open">
+			<a id="Compra" class="category" onclick="selected(this); showcart()">
+				<img src="../icons/cart.png">
+				<p>Compra</p>
+			</a>
+
+			<a id="Usuário" class="category" onclick="selected(this)">
+				<img src="../icons/user.png">
+				<p>Usuário</p>
+			</a>
+
+			<a id="Entrega" class="category" onclick="selected(this)">
+				<img src="../icons/truck.png">
+				<p>Entrega</p>
+			</a>
+		</div>
+
+		<div id="items">
+
+		</div>
+
+		<div id="info" class="open">
+			<p>Desenvolvido por: Álvaro, Giovanna e Marcelo.</p>
+		</div>
+
+		<a id="check" href="" onclick="">
+			<img src="../icons/check.png">
+		</a>
+	</div>
+</body>
+<script src="../data.js"></script>
+<script src="script.js"></script>
+</html>
