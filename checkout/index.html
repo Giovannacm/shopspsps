@@ -23,31 +23,112 @@
 		</div>
 
 		<div id="menu" class="open">
-			<a id="Compra" class="category" onclick="selected(this); showcart()">
+			<a id="cart" class="category category-selected" onclick="selected(this)">
 				<img src="../icons/cart.png">
 				<p>Compra</p>
 			</a>
 
-			<a id="Usuário" class="category" onclick="selected(this)">
+			<a id="user" class="category" onclick="selected(this)">
 				<img src="../icons/user.png">
 				<p>Usuário</p>
 			</a>
 
-			<a id="Entrega" class="category" onclick="selected(this)">
+			<a id="delivery" class="category" onclick="selected(this)">
 				<img src="../icons/truck.png">
 				<p>Entrega</p>
+			</a>
+
+			<a id="payment" class="category" onclick="selected(this)">
+				<img src="../icons/payment.png">
+				<p>Pagameto</p>
 			</a>
 		</div>
 
 		<div id="items">
+			<div id="cart" class="item visible">
+				<h1>Carrinho</h1>
+				<div id="cart-items">
+					
+				</div>
+			</div>
 
+			<div id="user" class="item invisible">
+				<h1>Dados do usuário</h1>
+				<form id="form-user" action="" method="">
+					<label>Nome completo<input type="text" name="name" id="name" required></label>
+
+					<label>CPF<input type="tel" id="cpf" name="cpf" required></label>
+
+					<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
+
+					<label>Data de nascimento<input type="date" id="birthday" name="birthday"></label>
+					
+					<label>Sexo
+						<fieldset>
+							<label><input type="radio" name="gender" id="gender-f" value="f" required>Feminino</label>
+							<label><input type="radio" name="gender" id="gender-m" value="m" required>Masculino</label>
+						</fieldset>
+					</label>
+
+					<label>Telefone<input type="tel" name="phone" id="phone" required></label>
+				</form>
+			</div>
+
+			<div id="delivery" class="item invisible">
+				<h1>Dados de entrega</h1>
+				<form id="form-delivey">
+					<label>Endereço<input type="text" name="address" id="address" required></label>
+
+					<label>Número<input type="text" name="number" id="number" required></label>
+
+					<label>Complemento<input type="text" name="complement" id="complement"></label>
+
+					<label>Bairro<input type="text" name="district" id="district" required></label>
+
+					<label>Cidade<input type="text" name="city" id="city" required></label>
+
+					<label>Estado<input type="text" name="state" id="state" required></label>
+
+					<label>CEP<input type="text" name="cep" id="cep" required></label>
+
+					<label>Tipo de entrega<input type="text" name="delivery-method" id="delivery-method" required list="delivery-methods" oninput='loadDeliveryInfo()'></label>
+					<datalist id="delivery-methods">
+						<option value="Transportadora">
+						<option value="Correios">
+						<option value="Retirar na loja">
+					</datalist>
+
+					<p id="delivery-info" class="invisible">
+						
+					</p>
+				</form>
+			</div>
+
+			<div id="payment" class="item invisible">
+				<h1>Dados de pagamento</h1>
+				<form id="form-payment">
+					<label>Método<input type="text" name="payment-method" id="payment-method" required list="payment-methods" oninput='loadPaymentInfo()'></label>
+					<datalist id="payment-methods">
+						<option value="Dinheiro">
+						<option value="Cartão de crédito">
+						<option value="Cartão de débito">
+						<option value="Depósito">
+						<option value="Transferência">
+						<option value="Pix">
+					</datalist>
+
+					<p id="payment-info" class="invisible">
+					
+					</p>
+				</form>
+			</div>
 		</div>
 
 		<div id="info" class="open">
 			<p>Desenvolvido por: Álvaro, Giovanna e Marcelo.</p>
 		</div>
 
-		<a id="check" href="" onclick="">
+		<a id="check" href="../summary/index.html" onclick="">
 			<img src="../icons/check.png">
 		</a>
 	</div>

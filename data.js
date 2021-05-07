@@ -276,3 +276,5 @@ var produtos = [
 var categorias = ["Ração", "Coleira", "Brinquedo", "Higiene", "Outros"];
 
 var carrinho = [];
+
+var pedido = [];

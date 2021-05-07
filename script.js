@@ -10,7 +10,7 @@ input.onkeypress = function(e){
 		if(active != null)
 			active.classList.remove('category-selected');
 
-	    filterproducts(produtos, input.value);
+	    filterproducts(input.value);
     }
 }
 
@@ -21,7 +21,7 @@ function selected(object) {
 
 	object.classList.add('category-selected');
 
-	filterproducts(produtos, object.id);
+	filterproducts(object.id);
 }
 
 function loadproducts(products) {
@@ -35,6 +35,12 @@ function loadproducts(products) {
 		div.classList.add('visible');
 		items.appendChild(div);
 
+		let p = document.createElement('p');
+		p.className = 'item-category';
+		let category = document.createTextNode(products[i].category);
+    	p.appendChild(category);
+    	div.appendChild(p);
+
     	let img = document.createElement('img');
         img.src = products[i].img;
         div.appendChild(img);
@@ -44,7 +50,7 @@ function loadproducts(products) {
     	h1.appendChild(name);
     	div.appendChild(h1);
 
-    	let p = document.createElement('p');
+    	p = document.createElement('p');
 		let description = document.createTextNode(products[i].description);
     	p.appendChild(description);
     	div.appendChild(p);
@@ -77,13 +83,14 @@ function loadproducts(products) {
 	}
 }
 
-function filterproducts(products, category) {
+function filterproducts(category) {
 	let items = document.querySelector('#items');
 
 	for(var child=items.firstChild; child!==null; child=child.nextSibling) {
+		let item_category = child.querySelector('.item-category').innerHTML;
 		let h1 = child.getElementsByTagName('h1')[0].innerHTML;
 
-		if(h1.toLowerCase().includes(category.toLowerCase()))
+		if(item_category.toLowerCase().includes(category.toLowerCase()) || h1.toLowerCase().includes(category.toLowerCase())) //Se está na categoria ou nome
 		{
 			child.classList.remove('invisible');
 			child.classList.add('visible');
@@ -110,6 +117,7 @@ function filtervisibility() {
 		menu.className = "open";
 		info.innerHTML = "Desenvolvido por: Álvaro, Giovanna e Marcelo.";
 		items.style.width = "75vw";
+		items.style.transition = "width 0s";
 
 		for(var i = categories.length - 1; i >= 0; --i)
 		{
@@ -123,6 +131,7 @@ function filtervisibility() {
 		menu.className = "close";
 		info.innerHTML = "";
 		items.style.width = "85vw";
+		items.style.transition = "width 0.1s linear 0.1s";
 
 		for(var i = categories.length - 1; i >= 0; --i)
 		{
@@ -174,7 +183,8 @@ function removeproduct(id) {
 }
 
 function checkout() {
-	console.log(carrinho);
+	pedido.push(carrinho);
+	console.log(pedido);
 }
 
 window.onload = function(e) {

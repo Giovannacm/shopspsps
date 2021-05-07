@@ -1,0 +1,171 @@
+body {
+	margin: 0px;
+  	padding: 0px;
+  	font-family: 'Roboto', sans-serif;
+  	font-size: 15px;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 100vw;
+	grid-template-rows: 10vh auto 5vh;
+}
+
+#header {
+	background-color: #fff;
+	grid-column: 1/2;
+	grid-row: 1/2;
+	border-bottom: 1px solid #e0e0e0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+}
+
+#info {
+	background-color: #fff;
+	grid-column: 1/2;
+	grid-row: 3/4;
+	font-size: 12px;
+	color: #5f6368;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	overflow: auto;
+	padding: 10px 0px;
+}
+
+#info p {
+	margin: 0px;
+}
+
+#item {
+	background-color: #fff;
+	grid-column: 1/2;
+	grid-row: 5/6;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	height: auto;
+	width: 75vw;
+	margin-bottom: 20px;
+}
+
+#filter {
+	margin-left: 60px;
+}
+
+#filter button {
+	border: none;
+	border-radius: 50%;
+	background-color: #fff;
+	cursor: pointer;
+	width: 48px; 
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#filter button:hover {
+	background-color: #f1f3f4;
+}
+
+#filter button img {
+	width: 20px; 
+	height: 20px;
+}
+
+#header img {
+	width: 42px; 
+	height: 42px;
+	margin: 5px;
+}
+
+#header a {
+	color: black;
+	text-decoration: none;
+}
+
+#header p {
+	font-family: 'Itim', cursive;
+	font-size: 42px;
+	margin: 0px;
+	padding: 0px;
+	margin: 5px;
+}
+
+#header div, #logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+#logo {
+	cursor: pointer;
+	margin-right: 60px;
+}
+
+@media screen and (max-width: 1040px) {
+  	.container {
+		display: grid;
+		grid-template-columns: 100vw;
+		grid-template-rows: 10vh 10vh auto 5vh;
+	}
+
+	#header {
+		grid-column: 1/2;
+		grid-row: 1/2;
+		margin: 0px;
+		height: 10vh;
+	}
+
+	#menu {
+		background-color: transparent;
+		grid-column: 1/2;
+		grid-row: 2/3;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		width: 100vw;
+		margin-top: 0px;
+	}
+
+	#info {
+		grid-column: 1/2;
+		grid-row: 4/5;
+		width: 100vw;
+	}
+
+	.category {
+		background-color: #fff;
+		border-radius: 0px 0px 25px 25px;
+		height: 82px;
+		width: 20vw;
+		margin: 0px;
+		flex-direction: column;
+	}
+
+	.category img {
+		margin-left: 0px;
+		margin-top: 10px;
+	}
+
+	.category p {
+		padding-left: 0px;
+	}
+
+	.category-selected {
+		background-color: #e6dbff;
+	}
+
+	.category-close {
+		height: 46px; 
+	}
+}
