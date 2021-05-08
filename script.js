@@ -150,8 +150,17 @@ function addproduct(id) {
 	if(cont < 99)
 	{
 		cont++;
-		let product = produtos.find(object => object.id == id);
-		carrinho.push(product);
+		let incart = carrinho.find(object => object.product.id == id);
+
+		if(incart == undefined)
+		{
+			let product = produtos.find(object => object.id == id);
+			carrinho.push({quantity: 1, product: product});
+		}
+		else
+		{
+			incart.quantity++;
+		}
 	}
 
 	p.innerHTML = cont.toString();
@@ -169,11 +178,21 @@ function removeproduct(id) {
 	if(cont > 0)
 	{
 		cont--;
-		let index = carrinho.indexOf(produtos.find(object => object.id == id));
+		let incart = carrinho.find(object => object.product.id == id);
 
-		if (index > -1) {
-  			carrinho.splice(index, 1);
+		if(incart.quantity == 1)
+		{
+			let index = carrinho.indexOf(incart);
+
+			if (index > -1) {
+  				carrinho.splice(index, 1);
+			}
 		}
+		else
+		{
+			incart.quantity--;
+		}
+		console.log(carrinho);
 	}
 
 	p.innerHTML = cont.toString();
@@ -184,7 +203,7 @@ function removeproduct(id) {
 
 function checkout() {
 	pedido.push(carrinho);
-	console.log(pedido);
+	console.log(carrinho);
 }
 
 window.onload = function(e) {
