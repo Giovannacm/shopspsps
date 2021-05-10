@@ -275,6 +275,51 @@ var produtos = [
 
 var categorias = ["Ração", "Coleira", "Brinquedo", "Higiene", "Outros"];
 
-var carrinho = [];
+var carrinho = [
+	{quantity: 1, product: {
+		id: "2",
+		name: "Ração 2",
+		category: "Ração",
+		price: "21.70",
+		img: "imgs/racao2.jfif",
+		description: "Essa ração é a mais cara. Os gatos sempre vão comer dela, até sem fome."}
+	},
+	{quantity: 3, product: {
+		id: "15",
+		name: "Brinquedo 6",
+		category: "Brinquedo",
+		price: "15.30",
+		img: "imgs/brinquedo6.jfif",
+		description: "Essa ração é a mais barata. Talvez eles não gostem muito, por conta do sabor."}
+	},
+	{quantity: 1, product: {
+		id: "32",
+		name: "Outros 2",
+		category: "Outros",
+		price: "21.70",
+		img: "imgs/outros2.jfif",
+		description: "Essa ração é a mais cara. Os gatos sempre vão comer dela, até sem fome."}
+	}
+];
 
-var pedido = [];
+var entrega = {address: "Rua Giovanna",
+	cep: "19200000",
+	city: "Pirapozinho",
+	complement: "Casa",
+	delivery_method: "Correios",
+	district: "Centro",
+	number: "123",
+	state: "SP"
+};
+
+var pagamento = {payment_method: "Cartão de crédito"};
+
+var usuario = {birthday: "2021-05-04",
+	cpf: "123",
+	email: "gio@email.com",
+	gender: "f",
+	name: "Giovanna",
+	phone: "123"
+};
+
+var pedido = {cart: carrinho, delivery: entrega, payment: pagamento, user: usuario};

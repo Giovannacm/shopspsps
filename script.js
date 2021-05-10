@@ -166,7 +166,11 @@ function addproduct(id) {
 	p.innerHTML = cont.toString();
 
 	let cont2 = document.querySelector('#cont-cart');
-	cont2.innerHTML = carrinho.length.toString();
+	let aux = 0;
+	for(var i=0 ; i<carrinho.length ; i++) {
+		aux += carrinho[i].quantity;
+	}
+	cont2.innerHTML = aux.toString();
 }
 
 function removeproduct(id) {
@@ -192,18 +196,20 @@ function removeproduct(id) {
 		{
 			incart.quantity--;
 		}
-		console.log(carrinho);
 	}
 
 	p.innerHTML = cont.toString();
 
 	let cont2 = document.querySelector('#cont-cart');
-	cont2.innerHTML = carrinho.length.toString();
+	let aux = 0;
+	for(var i=0 ; i<carrinho.length ; i++) {
+		aux += carrinho[i].quantity;
+	}
+	cont2.innerHTML = aux.toString();
 }
 
-function checkout() {
-	pedido.push(carrinho);
-	console.log(carrinho);
+function checkout(cart) {
+	pedido.cart = carrinho;
 }
 
 window.onload = function(e) {

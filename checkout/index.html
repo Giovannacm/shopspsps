@@ -47,9 +47,19 @@
 		<div id="items">
 			<div id="cart" class="item visible">
 				<h1>Carrinho</h1>
-				<div id="cart-items">
-					
-				</div>
+				<table id="cart-items">
+					<thead>
+						<th>ID</th>
+						<th>Categoria</th>
+						<th>Produto</th>
+						<th>Valor</th>
+						<th>Quantidade</th>
+						<th>Total</th>
+					</thead>
+					<tbody>
+						
+					</tbody>
+				</table>
 			</div>
 
 			<div id="user" class="item invisible">
@@ -65,7 +75,7 @@
 					
 					<label>Sexo
 						<fieldset>
-							<label><input type="radio" name="gender" id="gender-f" value="f" required>Feminino</label>
+							<label><input type="radio" name="gender" id="gender-f" value="f" required checked>Feminino</label>
 							<label><input type="radio" name="gender" id="gender-m" value="m" required>Masculino</label>
 						</fieldset>
 					</label>
@@ -128,7 +138,7 @@
 			<p>Desenvolvido por: Álvaro, Giovanna e Marcelo.</p>
 		</div>
 
-		<a id="check" href="../summary/index.html" onclick="">
+		<a id="check" onclick="summary(pedido)" href="../summary/index.html">
 			<img src="../icons/check.png">
 		</a>
 	</div>

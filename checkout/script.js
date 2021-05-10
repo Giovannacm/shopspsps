@@ -9,60 +9,99 @@ function selected(object) {
 }
 
 function loadcart(products) {
-	let items = document.querySelector('#cart-items');
-	items.innerHTML = "";
+    let items = document.querySelector('#cart-items')
+    let table = items.getElementsByTagName('tbody')[0];
+    let totalorder = 0;
 
 	for(var i=0 ; i<products.length ; i++) {
-		let div = document.createElement('div');
-		div.id = 'item-' + products[i].id;
-		items.appendChild(div);
+		let tr = document.createElement('tr');
+		tr.id = 'item-' + products[i].product.id;
+        table.appendChild(tr);
 
-		let p = document.createElement('p');
-		p.className = 'item-category';
-		let category = document.createTextNode(products[i].category);
-    	p.appendChild(category);
-    	div.appendChild(p);
+		let td = document.createElement('td');
+        let p = document.createElement('p');
+        let description = document.createTextNode(products[i].product.id);
+        p.appendChild(description);
+        td.appendChild(p);
+        tr.appendChild(td);
 
-    	let img = document.createElement('img');
-        img.src = products[i].img;
-        div.appendChild(img);
+        td = document.createElement('td');
+        p = document.createElement('p');
+        p.className = 'item-category';
+        description = document.createTextNode(products[i].product.category);
+        p.appendChild(description);
+        td.appendChild(p);
+        tr.appendChild(td);
 
-        let h1 = document.createElement('h1');
-		let name = document.createTextNode(products[i].name + " - R$" + products[i].price);
-    	h1.appendChild(name);
-    	div.appendChild(h1);
+        td = document.createElement('td');
+        
+        p = document.createElement('p');
+        p.className = 'product';
+        
+        let img = document.createElement('img');
+        img.src = '../' + products[i].product.img; //voltando na pasta
+        p.appendChild(img);
+        tr.appendChild(td);
 
-    	p = document.createElement('p');
-		let description = document.createTextNode(products[i].description);
-    	p.appendChild(description);
-    	div.appendChild(p);
+        description = document.createTextNode(products[i].product.name);
+        p.appendChild(description);
+        td.appendChild(p);
 
-    	let buttons = document.createElement('div');
-		buttons.id = 'buttons';
+        td = document.createElement('td');
+        p = document.createElement('p');
+        description = document.createTextNode('R$ ' + products[i].product.price);
+        p.appendChild(description);
+        td.appendChild(p);
+        tr.appendChild(td);
 
-    	let a = document.createElement('a');
-    	a.className = "more";
-    	a.setAttribute('onclick',`addproduct(${products[i].id})`);
-    	img = document.createElement('img');
-		img.src = "icons/more.png";
-    	a.appendChild(img);
-    	buttons.appendChild(a);
+        td = document.createElement('td');
+        p = document.createElement('p');
+        p.className = 'quantity';
+        description = document.createTextNode(products[i].quantity);
+        p.appendChild(description);
+        td.appendChild(p);
 
-    	p = document.createElement('p');
-    	p.innerHTML = "0";
-    	p.id = 'cont-item-' + products[i].id;
-    	buttons.appendChild(p);
+        a = document.createElement('a');
+        a.className = "delete";
+        a.setAttribute('onclick',`deleteproduct(${products[i].product.id})`);
+        img = document.createElement('img');
+        img.src = "../icons/delete.png";
+        a.appendChild(img);
+        p.appendChild(a);
 
-    	a = document.createElement('a');
-    	a.className = "less";
-    	a.setAttribute('onclick',`removeproduct(${products[i].id})`);
-    	img = document.createElement('img');
-		img.src = "icons/less.png";
-    	a.appendChild(img);
-    	buttons.appendChild(a);
+        tr.appendChild(td);
 
-    	div.appendChild(buttons);
-	}
+        td = document.createElement('td');
+        td.classList.add('total');
+        p = document.createElement('p');
+        let total = parseFloat(products[i].product.price) * parseFloat(products[i].quantity);
+        totalorder += total;
+        description = document.createTextNode('R$ ' + total.toFixed(2));
+        p.appendChild(description);
+        td.appendChild(p);
+        tr.appendChild(td);
+    }
+
+    p = document.createElement('p');
+    p.id = 'total-order';
+    description = document.createTextNode('R$ ' + totalorder.toFixed(2));
+    p.appendChild(description);
+
+    items.appendChild(p);
+}
+
+function deleteproduct(id) {
+    let items = document.querySelector('#cart-items')
+    let table = items.getElementsByTagName('tbody')[0];
+    let tablerow = table.querySelector('#item-' + id);
+
+    let incart = carrinho.find(object => object.product.id == id);
+    let index = carrinho.indexOf(incart);
+
+    if (index > -1) {
+        carrinho.splice(index, 1);
+        table.removeChild(tablerow);
+    }
 }
 
 function filterproducts(category) {
@@ -192,6 +231,39 @@ function loadPaymentInfo() {
     }
 }
 
+function summary(order) {
+    pedido.cart = carrinho;
+
+    let usuario = {
+        name: document.querySelector('#name').value,
+        cpf: document.querySelector('#cpf').value,
+        email: document.querySelector('#email').value,
+        birthday: document.querySelector('#birthday').value,
+        gender: document.querySelector('#gender-f').checked == true ? 'f' : 'm',
+        phone: document.querySelector('#phone').value
+    }
+    pedido.user = usuario;
+    
+    let entrega = {
+        address: document.querySelector('#address').value,
+        number: document.querySelector('#number').value,
+        complement: document.querySelector('#complement').value,
+        district: document.querySelector('#district').value,
+        city: document.querySelector('#city').value,
+        state: document.querySelector('#state').value,
+        cep: document.querySelector('#cep').value,
+        delivery_method: document.querySelector('#delivery-method').value
+    }
+    pedido.delivery = entrega;
+
+    let pagamento = {
+        payment_method: document.querySelector('#payment-method').value,
+    }
+    pedido.payment = pagamento;
+
+    console.log(pedido);
+}
+
 window.onload = function(e) {
-	console.log(carrinho);
+    loadcart(pedido.cart);
 }
