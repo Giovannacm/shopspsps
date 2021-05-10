@@ -1,3 +1,5 @@
+var cart = [];
+
 function selected(object) {
 	let active = document.querySelector('.category-selected');
 	if(active != null)
@@ -8,10 +10,17 @@ function selected(object) {
 	filterproducts(object.id);
 }
 
+function gettotal(products) {
+    let total = 0;
+    for(var i=0 ; i<products.length ; i++)
+        total += parseFloat(products[i].quantity) * parseFloat(products[i].product.price);
+
+    return total;
+}
+
 function loadcart(products) {
     let items = document.querySelector('#cart-items')
     let table = items.getElementsByTagName('tbody')[0];
-    let totalorder = 0;
 
 	for(var i=0 ; i<products.length ; i++) {
 		let tr = document.createElement('tr');
@@ -49,7 +58,7 @@ function loadcart(products) {
 
         td = document.createElement('td');
         p = document.createElement('p');
-        description = document.createTextNode('R$ ' + products[i].product.price);
+        description = document.createTextNode('R$ ' + products[i].product.price.toFixed(2));
         p.appendChild(description);
         td.appendChild(p);
         tr.appendChild(td);
@@ -63,7 +72,7 @@ function loadcart(products) {
 
         a = document.createElement('a');
         a.className = "delete";
-        a.setAttribute('onclick',`deleteproduct(${products[i].product.id})`);
+        a.setAttribute('onclick','deleteproduct(' + products[i].product.id + ')');
         img = document.createElement('img');
         img.src = "../icons/delete.png";
         a.appendChild(img);
@@ -74,8 +83,7 @@ function loadcart(products) {
         td = document.createElement('td');
         td.classList.add('total');
         p = document.createElement('p');
-        let total = parseFloat(products[i].product.price) * parseFloat(products[i].quantity);
-        totalorder += total;
+        let total = products[i].product.price * products[i].quantity;
         description = document.createTextNode('R$ ' + total.toFixed(2));
         p.appendChild(description);
         td.appendChild(p);
@@ -84,7 +92,7 @@ function loadcart(products) {
 
     p = document.createElement('p');
     p.id = 'total-order';
-    description = document.createTextNode('R$ ' + totalorder.toFixed(2));
+    description = document.createTextNode('Total: R$ ' + gettotal(products).toFixed(2));
     p.appendChild(description);
 
     items.appendChild(p);
@@ -95,12 +103,15 @@ function deleteproduct(id) {
     let table = items.getElementsByTagName('tbody')[0];
     let tablerow = table.querySelector('#item-' + id);
 
-    let incart = carrinho.find(object => object.product.id == id);
-    let index = carrinho.indexOf(incart);
+    let incart = cart.find(object => object.product.id == id);
+    let index = cart.indexOf(incart);
 
     if (index > -1) {
-        carrinho.splice(index, 1);
+        cart.splice(index, 1);
         table.removeChild(tablerow);
+
+        let p = document.querySelector('#total-order')
+        p.innerHTML = 'Total: R$ ' + gettotal(cart).toFixed(2);
     }
 }
 
@@ -231,8 +242,10 @@ function loadPaymentInfo() {
     }
 }
 
-function summary(order) {
-    pedido.cart = carrinho;
+function summary() {
+    var order = {};
+
+    order.cart = cart;
 
     let usuario = {
         name: document.querySelector('#name').value,
@@ -242,7 +255,7 @@ function summary(order) {
         gender: document.querySelector('#gender-f').checked == true ? 'f' : 'm',
         phone: document.querySelector('#phone').value
     }
-    pedido.user = usuario;
+    order.user = usuario;
     
     let entrega = {
         address: document.querySelector('#address').value,
@@ -254,16 +267,18 @@ function summary(order) {
         cep: document.querySelector('#cep').value,
         delivery_method: document.querySelector('#delivery-method').value
     }
-    pedido.delivery = entrega;
+    order.delivery = entrega;
 
     let pagamento = {
         payment_method: document.querySelector('#payment-method').value,
     }
-    pedido.payment = pagamento;
+    order.payment = pagamento;
 
-    console.log(pedido);
+    let tosend = JSON.stringify(order);
+    sessionStorage.setItem('order', tosend);
 }
 
 window.onload = function(e) {
-    loadcart(pedido.cart);
+    cart = JSON.parse(sessionStorage.getItem('cart'));
+    loadcart(cart);
 }

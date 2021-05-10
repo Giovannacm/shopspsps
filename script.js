@@ -1,6 +1,5 @@
 var input = document.querySelector('#input-search')
 input.onkeypress = function(e){
-	let products = [];
 	if (!e) 
 		e = window.event;
     var keyCode = e.code || e.key;
@@ -46,7 +45,7 @@ function loadproducts(products) {
         div.appendChild(img);
 
         let h1 = document.createElement('h1');
-		let name = document.createTextNode(products[i].name + " - R$" + products[i].price);
+		let name = document.createTextNode(products[i].name + " - R$" + products[i].price.toFixed(2));
     	h1.appendChild(name);
     	div.appendChild(h1);
 
@@ -103,7 +102,7 @@ function filterproducts(category) {
 	}
 }
 
-function filtervisibility() {
+function filtervisibility() { //usa categorias de data.js
 	let menu = document.querySelector('#menu');
 	let info = document.querySelector('#info');
 	let categories = menu.getElementsByTagName('p');
@@ -141,7 +140,7 @@ function filtervisibility() {
 	}
 }
 
-function addproduct(id) {
+function addproduct(id) { //usa carrinho e produtos de data.js
 	let item = document.querySelector('#item-' + id);
 	let p = item.querySelector('#cont-item-' + id);
 	
@@ -173,7 +172,7 @@ function addproduct(id) {
 	cont2.innerHTML = aux.toString();
 }
 
-function removeproduct(id) {
+function removeproduct(id) { //usa carrinho de data.js
 	let item = document.querySelector('#item-' + id);
 	let p = item.querySelector('#cont-item-' + id);
 
@@ -208,8 +207,9 @@ function removeproduct(id) {
 	cont2.innerHTML = aux.toString();
 }
 
-function checkout(cart) {
-	pedido.cart = carrinho;
+function checkout(cart) { //usa carrinho de data.js
+	let tosend = JSON.stringify(carrinho);
+	sessionStorage.setItem('cart', tosend);
 }
 
 window.onload = function(e) {
