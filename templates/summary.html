@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Shopspsps</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/summary.css')}}">
+	<link rel="icon" href="{{ url_for('static', filename='icons/gato.svg')}}">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div id="header">
+			<div id="filter">
+				<a href="{{url_for('checkout')}}"><img src="{{ url_for('static', filename='icons/arrow.png')}}"></a>
+			</div>
+
+			<a id="logo" href="{{url_for('index')}}">
+				<img src="{{ url_for('static', filename='icons/gato.png')}}">
+				<p>Shopspsps</p>
+			</a>
+		</div>
+
+		<div id="order">
+			<div id="order-items">
+				<h1>Resumo do pedido</h1>
+				<div id="user" class="item">
+					<h2>Pedido para: </h2> 
+					<p>{{ result['name'] }} | {{ result['email'] }} | {{ result['phone'] }}</p>
+				</div>
+
+				<div id="delivery" class="item">
+					<h2>Entregar em: </h2> 
+					<p>
+						{{ result['address'] }},
+						{{ result['number'] }}, 
+						{{ result['complement'] }}, 
+						{{ result['district'] }}, 
+						{{ result['city'] }} - 
+						{{ result['state'] }},
+						{{ result['cep'] }}.
+					</p>
+
+					<h2>Tipo de entrega: </h2>
+						<p>{{ result['delivery-method'] }}</p>
+					</p>
+				</div>
+
+				<div id="cart" class="item">
+					<h2>Tipo de pagamento: </h2>
+						<p>{{ result['payment-method'] }}</p>
+					</p>
+				</div>
+			</div>
+
+			<button id="confirm-order" onclick="confirm()">Confirmar pedido</button>
+
+			<p id="order-info" class="invisible">
+						
+			</p>
+		</div>
+
+		<div id="info" class="open">
+			<p>Desenvolvido por: Álvaro, Giovanna e Marcelo.</p>
+		</div>
+	</div>
+</body>
+<script src="{{ url_for('static', filename='script/summary.js')}}"></script>
+</html>

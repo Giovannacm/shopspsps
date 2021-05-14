@@ -3,8 +3,8 @@
 <head>
 	<title>Shopspsps</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="icon" href="icons/gato.svg">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css')}}">
+	<link rel="icon" href="{{ url_for('static', filename='icons/gato.svg')}}">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -13,43 +13,43 @@
 	<div class="container">
 		<div id="header">
 			<div id="filter">
-				<button onclick="filtervisibility()"><img src="icons/filter.png"></button>
+				<button onclick="filtervisibility()"><img src="{{ url_for('static', filename='icons/filter.png')}}"></button>
 			</div>
 
-			<a id="logo" href="">
-				<img src="icons/gato.png">
+			<a id="logo" href="{{url_for('index')}}">
+				<img src="{{ url_for('static', filename='icons/gato.png')}}">
 				<p>Shopspsps</p>
 			</a>
 
 			<div id="search">
-				<img src="icons/loupe.png">
+				<img src="{{ url_for('static', filename='icons/loupe.png')}}">
 				<input id="input-search" type="text" placeholder="Pesquisar">
 			</div>
 		</div>
 
 		<div id="menu" class="open">
 			<a id="Ração" class="category" onclick="selected(this)">
-				<img src="icons/animal.png">
+				<img src="{{ url_for('static', filename='icons/animal.png')}}">
 				<p>Ração</p>
 			</a>
 
 			<a id="Coleira" class="category" onclick="selected(this)">
-				<img src="icons/collar.png">
+				<img src="{{ url_for('static', filename='icons/collar.png')}}">
 				<p>Coleira</p>
 			</a>
 
 			<a id="Brinquedo" class="category" onclick="selected(this)">
-				<img src="icons/dog-ball.png">
+				<img src="{{ url_for('static', filename='icons/dog-ball.png')}}">
 				<p>Brinquedo</p>
 			</a>
 
 			<a id="Higiene" class="category" onclick="selected(this)">
-				<img src="icons/toilet-paper.png">
+				<img src="{{ url_for('static', filename='icons/toilet-paper.png')}}">
 				<p>Higiene</p>
 			</a>
 
 			<a id="Outros" class="category" onclick="selected(this)">
-				<img src="icons/box.png">
+				<img src="{{ url_for('static', filename='icons/box.png')}}">
 				<p>Outros</p>
 			</a>
 		</div>
@@ -62,12 +62,12 @@
 
 		</div>
 
-		<a id="cart" onclick="checkout(carrinho)" href="checkout/index.html">
+		<a id="cart" onclick="checkout(carrinho)" href="{{url_for('checkout')}}">
 			<p id="cont-cart">0</p>
-			<img src="icons/cart.png">
+			<img src="{{ url_for('static', filename='icons/cart.png')}}">
 		</a>
 	</div>
 </body>
-<script src="data.js"></script>
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script/data.js')}}"></script>
+<script src="{{ url_for('static', filename='script/index.js')}}"></script>
 </html>

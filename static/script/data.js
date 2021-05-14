@@ -272,7 +272,3 @@ var produtos = [
 		description: "Essa ração é mediana, mas é boa e legal. Os gatos vão comer sempre."
 	}
 ];
-
-var categorias = ["Ração", "Coleira", "Brinquedo", "Higiene", "Outros"];
-
-var carrinho = [];

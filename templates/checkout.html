@@ -3,8 +3,8 @@
 <head>
 	<title>Shopspsps</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="styles.css">
-	<link rel="icon" href="../icons/gato.svg">
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles/checkout.css')}}">
+	<link rel="icon" href="{{ url_for('static', filename='icons/gato.svg')}}">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -13,33 +13,33 @@
 	<div class="container">
 		<div id="header">
 			<div id="filter">
-				<button onclick="filtervisibility()"><img src="../icons/filter.png"></button>
+				<button onclick="filtervisibility()"><img src="{{ url_for('static', filename='icons/filter.png')}}"></button>
 			</div>
 
-			<a id="logo" href="../index.html">
-				<img src="../icons/gato.png">
+			<a id="logo" href="{{url_for('index')}}">
+				<img src="{{ url_for('static', filename='icons/gato.png')}}">
 				<p>Shopspsps</p>
 			</a>
 		</div>
 
 		<div id="menu" class="open">
 			<a id="cart" class="category category-selected" onclick="selected(this)">
-				<img src="../icons/cart.png">
+				<img src="{{ url_for('static', filename='icons/cart.png')}}">
 				<p>Compra</p>
 			</a>
 
 			<a id="user" class="category" onclick="selected(this)">
-				<img src="../icons/user.png">
+				<img src="{{ url_for('static', filename='icons/user.png')}}">
 				<p>Usuário</p>
 			</a>
 
 			<a id="delivery" class="category" onclick="selected(this)">
-				<img src="../icons/truck.png">
+				<img src="{{ url_for('static', filename='icons/truck.png')}}">
 				<p>Entrega</p>
 			</a>
 
 			<a id="payment" class="category" onclick="selected(this)">
-				<img src="../icons/payment.png">
+				<img src="{{ url_for('static', filename='icons/payment.png')}}">
 				<p>Pagameto</p>
 			</a>
 		</div>
@@ -62,9 +62,11 @@
 				</table>
 			</div>
 
-			<div id="user" class="item invisible">
-				<h1>Dados do usuário</h1>
-				<form id="form-user" action="" method="">
+				
+			<form id="form-data" action="{{url_for('summary')}}" method='POST' onsubmit="summary()">
+				<div id="user" class="item invisible">
+					<h1>Dados do usuário</h1>
+
 					<label>Nome completo<input type="text" name="name" id="name" required></label>
 
 					<label>CPF<input type="tel" id="cpf" name="cpf" required></label>
@@ -81,12 +83,11 @@
 					</label>
 
 					<label>Telefone<input type="tel" name="phone" id="phone" required></label>
-				</form>
-			</div>
+				</div>
 
-			<div id="delivery" class="item invisible">
-				<h1>Dados de entrega</h1>
-				<form id="form-delivey">
+				<div id="delivery" class="item invisible">
+					<h1>Dados de entrega</h1>
+				
 					<label>Endereço<input type="text" name="address" id="address" required></label>
 
 					<label>Número<input type="text" name="number" id="number" required></label>
@@ -103,45 +104,45 @@
 
 					<label>Tipo de entrega<input type="text" name="delivery-method" id="delivery-method" required list="delivery-methods" oninput='loadDeliveryInfo()'></label>
 					<datalist id="delivery-methods">
-						<option value="Transportadora">
-						<option value="Correios">
-						<option value="Retirar na loja">
+						<option value="Transportadora"></option>
+						<option value="Correios"></option>
+						<option value="Retirar na loja"></option>
 					</datalist>
 
 					<p id="delivery-info" class="invisible">
 						
 					</p>
-				</form>
-			</div>
+				</div>
 
-			<div id="payment" class="item invisible">
-				<h1>Dados de pagamento</h1>
-				<form id="form-payment">
+				<div id="payment" class="item invisible">
+					<h1>Dados de pagamento</h1>
+
 					<label>Método<input type="text" name="payment-method" id="payment-method" required list="payment-methods" oninput='loadPaymentInfo()'></label>
 					<datalist id="payment-methods">
-						<option value="Dinheiro">
-						<option value="Cartão de crédito">
-						<option value="Cartão de débito">
-						<option value="Depósito">
-						<option value="Transferência">
-						<option value="Pix">
+						<option value="Dinheiro"></option>
+						<option value="Cartão de crédito"></option>
+						<option value="Cartão de débito"></option>
+						<option value="Depósito"></option>
+						<option value="Transferência"></option>
+						<option value="Pix"></option>
 					</datalist>
 
 					<p id="payment-info" class="invisible">
 					
 					</p>
-				</form>
-			</div>
+				</div>
+
+				<button id='check' type="submit" form="form-data" value="submit">
+					<img src="{{ url_for('static', filename='icons/check.png')}}">
+				</button>
+			</form>
 		</div>
 
 		<div id="info" class="open">
 			<p>Desenvolvido por: Álvaro, Giovanna e Marcelo.</p>
 		</div>
-
-		<a id="check" onclick="summary()" href="../summary/index.html">
-			<img src="../icons/check.png">
-		</a>
+		
 	</div>
 </body>
-<script src="script.js"></script>
+<script src="{{ url_for('static', filename='script/checkout.js')}}"></script>
 </html>

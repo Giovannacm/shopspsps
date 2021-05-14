@@ -1,3 +1,6 @@
+var categorias = ["Ração", "Coleira", "Brinquedo", "Higiene", "Outros"];
+var carrinho = [];
+
 var input = document.querySelector('#input-search')
 input.onkeypress = function(e){
 	if (!e) 
@@ -41,7 +44,7 @@ function loadproducts(products) {
     	div.appendChild(p);
 
     	let img = document.createElement('img');
-        img.src = products[i].img;
+        img.src = "static/" + products[i].img;
         div.appendChild(img);
 
         let h1 = document.createElement('h1');
@@ -61,7 +64,7 @@ function loadproducts(products) {
     	a.className = "more";
     	a.setAttribute('onclick',`addproduct(${products[i].id})`);
     	img = document.createElement('img');
-		img.src = "icons/more.png";
+		img.src = "static/icons/more.png";
     	a.appendChild(img);
     	buttons.appendChild(a);
 
@@ -74,7 +77,7 @@ function loadproducts(products) {
     	a.className = "less";
     	a.setAttribute('onclick',`removeproduct(${products[i].id})`);
     	img = document.createElement('img');
-		img.src = "icons/less.png";
+		img.src = "static/icons/less.png";
     	a.appendChild(img);
     	buttons.appendChild(a);
 

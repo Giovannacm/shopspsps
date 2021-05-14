@@ -1,4 +1,6 @@
 var cart = [];
+let categorias = ["Compra", "Usuário", "Entrega", "Pagameto"];
+let delivery_time;
 
 function selected(object) {
 	let active = document.querySelector('.category-selected');
@@ -48,7 +50,7 @@ function loadcart(products) {
         p.className = 'product';
         
         let img = document.createElement('img');
-        img.src = '../' + products[i].product.img; //voltando na pasta
+        img.src = "static/" + products[i].product.img; //voltando na pasta
         p.appendChild(img);
         tr.appendChild(td);
 
@@ -74,7 +76,7 @@ function loadcart(products) {
         a.className = "delete";
         a.setAttribute('onclick','deleteproduct(' + products[i].product.id + ')');
         img = document.createElement('img');
-        img.src = "../icons/delete.png";
+        img.src = "static/icons/delete.png";
         a.appendChild(img);
         p.appendChild(a);
 
@@ -173,15 +175,16 @@ function loadDeliveryInfo() {
     var val = document.querySelector('#delivery-method').value;
     var opts = document.querySelector('#delivery-methods').childNodes;
     var p = document.querySelector('#delivery-info');
+    delivery_time = Math.floor(Math.random() * 8) + 2;
 
     for(var i = 0; i < opts.length; i++) {
      	if (val === 'Transportadora') {
-        	p.innerHTML = 'Prazo para entrega: ' + (Math.floor(Math.random() * 8) + 2) + ' dias.';
+        	p.innerHTML = 'Prazo para entrega: ' + (delivery_time +2) + ' dias.';
         	p.classList.remove('invisible');
     		p.classList.add('visible');
       	} 
       	else if (val === 'Correios') {
-        	p.innerHTML = 'Prazo para entrega: ' + (Math.floor(Math.random() * 8) + 2) + ' dias.';
+        	p.innerHTML = 'Prazo para entrega: ' + (delivery_time) + ' dias.';
         	p.classList.remove('invisible');
     		p.classList.add('visible');
       	}
@@ -265,12 +268,14 @@ function summary() {
         city: document.querySelector('#city').value,
         state: document.querySelector('#state').value,
         cep: document.querySelector('#cep').value,
-        delivery_method: document.querySelector('#delivery-method').value
+        delivery_method: document.querySelector('#delivery-method').value,
+        time: delivery_time
     }
     order.delivery = entrega;
 
     let pagamento = {
         payment_method: document.querySelector('#payment-method').value,
+        total: gettotal(cart).toFixed(2)
     }
     order.payment = pagamento;
 

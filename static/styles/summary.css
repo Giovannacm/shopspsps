@@ -27,12 +27,13 @@ body {
 
 #order {
 	background-color: #fff;
-	grid-column: 1/2;
-	grid-row: 3/4;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	align-content: center
+    grid-column: 1/2;
+    grid-row: 3/4;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #info {
@@ -134,6 +135,29 @@ body {
 
 #order-items h2 {
 	font-size: 18px;
+}
+
+.invisible {
+	display: none;
+}
+
+.visible {
+	display: flex;
+}
+
+#confirm-order {
+	font-size: 18px;
+	background-color: #2ad172;
+	border: 1px solid #2ad172;
+	border-radius: 5px;
+}
+
+#confirm-order:hover {
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#confirm-order::disabled {
+	background-color: #aaa;
 }
 
 @media screen and (max-width: 1040px) {
