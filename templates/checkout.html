@@ -69,7 +69,7 @@
 
 					<label>Nome completo<input type="text" name="name" id="name" required></label>
 
-					<label>CPF<input type="tel" id="cpf" name="cpf" required></label>
+					<label>CPF<input type="tel" id="cpf" name="cpf" placeholder="Ex: 123.123.123-12" required></label>
 
 					<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
 
@@ -82,7 +82,7 @@
 						</fieldset>
 					</label>
 
-					<label>Telefone<input type="tel" name="phone" id="phone" required></label>
+					<label>Telefone<input type="tel" name="phone" id="phone" placeholder="Ex: (12) 1234-1234" required></label>
 				</div>
 
 				<div id="delivery" class="item invisible">
@@ -100,7 +100,7 @@
 
 					<label>Estado<input type="text" name="state" id="state" required></label>
 
-					<label>CEP<input type="text" name="cep" id="cep" required></label>
+					<label>CEP<input type="text" name="cep" id="cep" placeholder="Ex: 12345-123" required></label>
 
 					<label>Tipo de entrega<input type="text" name="delivery-method" id="delivery-method" required list="delivery-methods" oninput='loadDeliveryInfo()'></label>
 					<datalist id="delivery-methods">

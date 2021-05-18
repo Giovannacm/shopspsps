@@ -114,6 +114,13 @@ body {
 	padding-left: 20px;
 }
 
+.item p {
+	border-left: 3px solid #2ad172;
+	border-radius: 2px;
+	margin: 20px;
+	padding-left: 10px;
+}
+
 #order-items {
 	border-radius: 5px;
 	height: auto;
@@ -158,63 +165,4 @@ body {
 
 #confirm-order::disabled {
 	background-color: #aaa;
-}
-
-@media screen and (max-width: 1040px) {
-  	.container {
-		display: grid;
-		grid-template-columns: 100vw;
-		grid-template-rows: 10vh 10vh auto 5vh;
-	}
-
-	#header {
-		grid-column: 1/2;
-		grid-row: 1/2;
-		margin: 0px;
-		height: 10vh;
-	}
-
-	#menu {
-		background-color: transparent;
-		grid-column: 1/2;
-		grid-row: 2/3;
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-		width: 100vw;
-		margin-top: 0px;
-	}
-
-	#info {
-		grid-column: 1/2;
-		grid-row: 4/5;
-		width: 100vw;
-	}
-
-	.category {
-		background-color: #fff;
-		border-radius: 0px 0px 25px 25px;
-		height: 82px;
-		width: 20vw;
-		margin: 0px;
-		flex-direction: column;
-	}
-
-	.category img {
-		margin-left: 0px;
-		margin-top: 10px;
-	}
-
-	.category p {
-		padding-left: 0px;
-	}
-
-	.category-selected {
-		background-color: #e6dbff;
-	}
-
-	.category-close {
-		height: 46px; 
-	}
 }
