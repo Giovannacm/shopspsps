@@ -23,6 +23,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100vw;
+	height: 10vh;
 }
 
 #menu {
@@ -67,6 +68,20 @@ body {
 	width: 75vw;
 }
 
+#login-div {
+	background-color: rgba(255, 255, 255, 0.9);
+	grid-column: 3/4;
+	grid-row: 2/4;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	top: calc(10vh + 1px);
+	left: 20vw;
+}
+
 #filter {
 	margin-left: 60px;
 }
@@ -92,7 +107,32 @@ body {
 	height: 20px;
 }
 
-#header img {
+#login-info {
+	font-size: 18px;
+	font-family: 'Roboto', sans-serif;
+}
+
+#login {
+	margin-right: 60px;
+	border-radius: 50%;
+	width: 48px; 
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#login img {
+	width: 30px; 
+	height: 30px;
+}
+
+#login:hover {
+	background-color: #f1f3f4;
+	cursor: pointer;
+}
+
+#logo img {
 	width: 42px; 
 	height: 42px;
 	margin: 5px;
@@ -103,7 +143,7 @@ body {
 	text-decoration: none;
 }
 
-#header p {
+#logo p {
 	font-family: 'Itim', cursive;
 	font-size: 42px;
 	margin: 0px;
@@ -119,7 +159,7 @@ body {
 
 #search {
 	height: 48px;
-	width: 40%;
+	width: 20%;
 	background-color: #f1f3f4;
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
@@ -229,6 +269,116 @@ body {
 	margin: 0px;
 	padding: 5px;
 	font-weight: bold;
+}
+
+#login-div form {
+	background-color: #fff;
+	width: 50%;
+	border-radius: 5px;
+	padding: 20px 10px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-content: center;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+#login-div form label {
+	width: 60%;
+	font-size: 18px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login-div form input {
+	height: 26px;
+	font-size: 16px;
+	box-sizing: border-box;
+	border: 2px solid #e0e0e0;
+	border-radius: 3px;
+	margin-bottom: 10px;
+}
+
+#login-div form input[type="tel"] {
+	width: 50%;
+}
+
+#login-div form fieldset {
+	width: 150px;
+	font-size: 16px;
+	box-sizing: border-box;
+	border: 2px solid #e0e0e0;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	padding: 0px;
+    padding-left: 10px;
+}
+
+#login-div form fieldset input {
+	width: 12px;
+	height: 12px;
+	margin: 0px;
+	margin-right: 20px;
+}
+
+#login-div form fieldset label {
+	width: 100%;
+	height: 24px;
+	margin: 0px;
+	font-size: 16px;
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+    align-items: center;
+}
+
+#login-div form input:focus, #login-div form fieldset:focus {
+	outline: none !important;
+    border: 2px solid #2ad172;
+}
+
+#login-div a img:hover {
+	cursor: pointer;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+}
+
+#form-buttons {
+	display: flex; 
+	flex-direction: row; 
+	align-items: center;
+	margin-top: 10px;
+}
+
+#form-buttons button {
+	width: 40px;
+ 	height: 40px;
+	border-radius: 50%;
+  	margin-right: 12px;
+  	cursor: pointer;
+  	text-decoration: none;
+  	font-size: 18px;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	border: none;
+}
+
+#close-form img{
+	width: 40px;
+ 	height: 40px;
+}
+
+#check {
+	background-color: #2ad172;	
+}
+
+#check img {
+	width: 30px; 
+	height: 30px;
+}
+
+#form-buttons button:hover {
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }
 
 #buttons {
@@ -362,6 +512,13 @@ body {
 		grid-column: 1/2;
 		grid-row: 3/4;
 		width: 95vw;
+	}
+
+	#login-div {
+		grid-column: 1/2;
+		grid-row: 3/4;
+		position: fixed;
+		left: 0;
 	}
 
 	#info {

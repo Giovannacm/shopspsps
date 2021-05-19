@@ -112,6 +112,7 @@ function filtervisibility() { //usa categorias de data.js
 	let container = document.querySelector('.container');
 	let a = menu.getElementsByTagName('a');
 	let items = document.querySelector('#items');
+	let login_div = document.querySelector('#login-div');
 
 	if(menu.className == "close") {
 		container.style["grid-template-columns"] = "10vw 10vw 80vw";
@@ -120,6 +121,7 @@ function filtervisibility() { //usa categorias de data.js
 		info.innerHTML = "Desenvolvido por: Álvaro, Giovanna e Marcelo.";
 		items.style.width = "75vw";
 		items.style.transition = "width 0s";
+		login_div.style.left = "20vw";
 
 		for(var i = categories.length - 1; i >= 0; --i)
 		{
@@ -134,6 +136,7 @@ function filtervisibility() { //usa categorias de data.js
 		info.innerHTML = "";
 		items.style.width = "85vw";
 		items.style.transition = "width 0.1s linear 0.1s";
+		login_div.style.left = "10vw";
 
 		for(var i = categories.length - 1; i >= 0; --i)
 		{
@@ -213,6 +216,15 @@ function removeproduct(id) { //usa carrinho de data.js
 function checkout(cart) { //usa carrinho de data.js
 	let tosend = JSON.stringify(carrinho);
 	sessionStorage.setItem('cart', tosend);
+}
+
+function login() {
+	let div = document.querySelector('#login-div');
+
+	if(div.className == 'invisible')
+		div.className = 'visible';
+	else
+		div.className = 'invisible';
 }
 
 window.onload = function(e) {
