@@ -73,7 +73,7 @@
 
 					<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
 
-					<label>Data de nascimento<input type="date" id="birthday" name="birthday"></label>
+					<label>Data de nascimento (opcional)<input type="date" id="birthday" name="birthday"></label>
 					
 					<label>Sexo
 						<fieldset>
@@ -92,7 +92,7 @@
 
 					<label>Número<input type="text" name="number" id="number" required></label>
 
-					<label>Complemento<input type="text" name="complement" id="complement"></label>
+					<label>Complemento (opcional)<input type="text" name="complement" id="complement"></label>
 
 					<label>Bairro<input type="text" name="district" id="district" required></label>
 
@@ -132,7 +132,7 @@
 					</p>
 				</div>
 
-				<button id='check' type="submit" form="form-data" value="submit">
+				<button id='check' type="submit" form="form-data" value="submit" title="Preencha todos os campos obrigatórios do formulário.">
 					<img src="{{ url_for('static', filename='icons/check.png')}}">
 				</button>
 			</form>
