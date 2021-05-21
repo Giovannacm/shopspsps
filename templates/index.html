@@ -67,7 +67,21 @@
 		</div>
 
 		<div id="items">
+			{% for product in products %}
+				<div id="item-{{ product[0] }}" class="item visible">
+					<p class="item-category">{{ product[2] }}</p>
+					<img src="static/{{ product[4] }}">
+					<h1>{{ product[1] }} - R${{ product[3] }}</h1>
+					<p>{{ product[5] }}</p>
+					<div id="buttons">
+						<a class="more" onclick="addproduct({{ product[0] }})"><img src="{{ url_for('static', filename='icons/more.png') }}"></a>
 
+						<p id="cont-item-{{ product[0] }}">0</p>
+
+						<a class="less" onclick="removeproduct({{ product[0] }})"><img src="{{ url_for('static', filename='icons/less.png') }}"></a>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 
 		<div id="login-div" class="invisible">

@@ -26,81 +26,25 @@ function selected(object) {
 	filterproducts(object.id);
 }
 
-function loadproducts(products) {
-	let items = document.querySelector('#items');
-	items.innerHTML = "";
-
-	for(var i=0 ; i<products.length ; i++) {
-		let div = document.createElement('div');
-		div.id = 'item-' + products[i].id;
-		div.className = 'item';
-		div.classList.add('visible');
-		items.appendChild(div);
-
-		let p = document.createElement('p');
-		p.className = 'item-category';
-		let category = document.createTextNode(products[i].category);
-    	p.appendChild(category);
-    	div.appendChild(p);
-
-    	let img = document.createElement('img');
-        img.src = "static/" + products[i].img;
-        div.appendChild(img);
-
-        let h1 = document.createElement('h1');
-		let name = document.createTextNode(products[i].name + " - R$" + products[i].price.toFixed(2));
-    	h1.appendChild(name);
-    	div.appendChild(h1);
-
-    	p = document.createElement('p');
-		let description = document.createTextNode(products[i].description);
-    	p.appendChild(description);
-    	div.appendChild(p);
-
-    	let buttons = document.createElement('div');
-		buttons.id = 'buttons';
-
-    	let a = document.createElement('a');
-    	a.className = "more";
-    	a.setAttribute('onclick',`addproduct(${products[i].id})`);
-    	img = document.createElement('img');
-		img.src = "static/icons/more.png";
-    	a.appendChild(img);
-    	buttons.appendChild(a);
-
-    	p = document.createElement('p');
-    	p.innerHTML = "0";
-    	p.id = 'cont-item-' + products[i].id;
-    	buttons.appendChild(p);
-
-    	a = document.createElement('a');
-    	a.className = "less";
-    	a.setAttribute('onclick',`removeproduct(${products[i].id})`);
-    	img = document.createElement('img');
-		img.src = "static/icons/less.png";
-    	a.appendChild(img);
-    	buttons.appendChild(a);
-
-    	div.appendChild(buttons);
-	}
-}
-
 function filterproducts(category) {
 	let items = document.querySelector('#items');
+	console.log(items.childNodes);
 
 	for(var child=items.firstChild; child!==null; child=child.nextSibling) {
-		let item_category = child.querySelector('.item-category').innerHTML;
-		let h1 = child.getElementsByTagName('h1')[0].innerHTML;
+		if(child.nodeName == 'DIV') {
+			let item_category = child.querySelector('.item-category').innerHTML;
+			let h1 = child.getElementsByTagName('h1')[0].innerHTML;
 
-		if(item_category.toLowerCase().includes(category.toLowerCase()) || h1.toLowerCase().includes(category.toLowerCase())) //Se está na categoria ou nome
-		{
-			child.classList.remove('invisible');
-			child.classList.add('visible');
-		}
-		else
-		{
-			child.classList.remove('visible');
-			child.classList.add('invisible');
+			if(item_category.toLowerCase().includes(category.toLowerCase()) || h1.toLowerCase().includes(category.toLowerCase())) //Se está na categoria ou nome
+			{
+				child.classList.remove('invisible');
+				child.classList.add('visible');
+			}
+			else
+			{
+				child.classList.remove('visible');
+				child.classList.add('invisible');
+			}
 		}
 	}
 }
@@ -225,8 +169,4 @@ function login() {
 		div.className = 'visible';
 	else
 		div.className = 'invisible';
-}
-
-window.onload = function(e) {
-	loadproducts(produtos, false);
 }
