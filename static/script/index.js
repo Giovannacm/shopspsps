@@ -51,8 +51,9 @@ function filterproducts(category) {
 
 function filtervisibility() { //usa categorias de data.js
 	let menu = document.querySelector('#menu');
+	let menu_categories = menu.querySelector('#categories');
 	let info = document.querySelector('#info');
-	let categories = menu.getElementsByTagName('p');
+	let categories = menu_categories.getElementsByTagName('p');
 	let container = document.querySelector('.container');
 	let a = menu.getElementsByTagName('a');
 	let items = document.querySelector('#items');
@@ -88,6 +89,35 @@ function filtervisibility() { //usa categorias de data.js
 			a[i].classList.add("category-close");
 		}
 	}
+}
+
+function setMax(object) {
+	let min_value = object.value;
+	let max_price = document.querySelector('#max-price');
+
+	if(min_value >= max_price.value) {
+		max_price.value = min_value;
+		let p_price = document.querySelector('#p-max-price');
+		p_price.innerHTML = 'R$' + max_price.value;
+	}
+}
+
+function setMin(object) {
+	let max_value = object.value;
+	let min_price = document.querySelector('#min-price');
+
+	if(max_value <= min_price.value) {
+		min_price.value = max_value;
+		let p_price = document.querySelector('#p-min-price');
+		p_price.innerHTML = 'R$' + min_price.value;
+	}
+}
+
+function setPrice(object) {
+	let id = object.id;
+	let p_price = document.querySelector('#p-' + id);
+
+	p_price.innerHTML = 'R$' + object.value;
 }
 
 function addproduct(id) { //usa carrinho e produtos de data.js

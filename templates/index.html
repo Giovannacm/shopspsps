@@ -36,30 +36,56 @@
 		</div>
 
 		<div id="menu" class="open">
-			<a id="Ração" class="category" onclick="selected(this)">
-				<img src="{{ url_for('static', filename='icons/animal.png')}}">
-				<p>Ração</p>
-			</a>
+			<div id="categories">
+				<a id="Ração" class="category" onclick="selected(this)">
+					<img src="{{ url_for('static', filename='icons/animal.png')}}">
+					<p>Ração</p>
+				</a>
 
-			<a id="Coleira" class="category" onclick="selected(this)">
-				<img src="{{ url_for('static', filename='icons/collar.png')}}">
-				<p>Coleira</p>
-			</a>
+				<a id="Coleira" class="category" onclick="selected(this)">
+					<img src="{{ url_for('static', filename='icons/collar.png')}}">
+					<p>Coleira</p>
+				</a>
 
-			<a id="Brinquedo" class="category" onclick="selected(this)">
-				<img src="{{ url_for('static', filename='icons/dog-ball.png')}}">
-				<p>Brinquedo</p>
-			</a>
+				<a id="Brinquedo" class="category" onclick="selected(this)">
+					<img src="{{ url_for('static', filename='icons/dog-ball.png')}}">
+					<p>Brinquedo</p>
+				</a>
 
-			<a id="Higiene" class="category" onclick="selected(this)">
-				<img src="{{ url_for('static', filename='icons/toilet-paper.png')}}">
-				<p>Higiene</p>
-			</a>
+				<a id="Higiene" class="category" onclick="selected(this)">
+					<img src="{{ url_for('static', filename='icons/toilet-paper.png')}}">
+					<p>Higiene</p>
+				</a>
 
-			<a id="Outros" class="category" onclick="selected(this)">
-				<img src="{{ url_for('static', filename='icons/box.png')}}">
-				<p>Outros</p>
-			</a>
+				<a id="Outros" class="category" onclick="selected(this)">
+					<img src="{{ url_for('static', filename='icons/box.png')}}">
+					<p>Outros</p>
+				</a>
+			</div>
+
+			<form id="price-filter" action="{{url_for('index')}}" method='POST'>
+				<label>Ordenar por:</label>
+				<input type="text" name="price-order" id="price-order" list="order" value="Categoria">
+				<datalist id="order">
+					<option value="Categoria">
+					<option value="Menor preço">
+					<option value="Maior preço">
+				</datalist>
+
+				<div class="tag-price">
+					<label for="points">Preço mínimo: </label>
+					<p id="p-min-price">R$0.0</p>
+				</div>
+				<input type="range" id="min-price" class="slider" name="min-price" value="0" min="0" max="50" step="0.5" oninput="setMax(this); setPrice(this)">
+
+				<div class="tag-price">
+					<label for="points">Preço máximo: </label>
+					<p id="p-max-price">R$50.0</p>
+				</div>
+				<input type="range" id="max-price" class="slider" name="max-price" value="50" min="0" max="50" step="0.5" oninput="setMin(this); setPrice(this)">
+
+				<button type="submit" form="price-filter" value="submit">Filtar</button>
+			</form>
 		</div>
 
 		<div id="info" class="open">
@@ -85,7 +111,7 @@
 		</div>
 
 		<div id="login-div" class="invisible">
-			<form id="form-user" id="form-data" method='POST'>
+			<form id="form-user" id="form-data" action="{{url_for('index')}}" method='POST'>
 				<label>Nome completo<input type="text" name="name" id="name" required></label>
 
 				<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
