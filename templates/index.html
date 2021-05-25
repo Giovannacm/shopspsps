@@ -26,8 +26,8 @@
 				<input id="input-search" type="text" placeholder="Pesquisar">
 			</div>
 
-			{% if result %}
-				<p id="login-info">Olá, <strong>{{ result['name'] }}</strong>!</p>
+			{% if username %}
+				<p id="login-info">Olá, <strong>{{ username }}</strong>!</p>
 			{% endif %}
 
 			<a id="login" onclick="login()">
@@ -63,7 +63,7 @@
 				</a>
 			</div>
 
-			<form id="price-filter" action="{{url_for('index')}}" method='POST'>
+			<form id="price-filter" action="{{url_for('index')}}" method='POST' class="visible">
 				<label>Ordenar por:</label>
 				<input type="text" name="price-order" id="price-order" list="order" value="Categoria">
 				<datalist id="order">
@@ -111,25 +111,18 @@
 		</div>
 
 		<div id="login-div" class="invisible">
-			<form id="form-user" id="form-data" action="{{url_for('index')}}" method='POST'>
-				<label>Nome completo<input type="text" name="name" id="name" required></label>
-
+			<form id="form-user" id="form-data" action="{{url_for('login')}}" method='POST'>
+				{% if error %}
+				    <p id="login-info">{{ error }}</p>
+				{% endif %}
+				
 				<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
 
 				<label>Senha<input type="password" name="password" required></label>
 
-				<label>CPF<input type="tel" id="cpf" name="cpf" placeholder="Ex: 123.123.123-12" required></label>
+				<h3>Não é cadastrado? <a id="register-link" onclick="signUp()">Cadastre-se</a>!</h3>
 
-				<label>Data de nascimento (opcional)<input type="date" id="birthday" name="birthday"></label>
-				
-				<label>Sexo
-					<fieldset>
-						<label><input type="radio" name="gender" id="gender-f" value="f" required checked>Feminino</label>
-						<label><input type="radio" name="gender" id="gender-m" value="m" required>Masculino</label>
-					</fieldset>
-				</label>
-
-				<label>Telefone<input type="tel" name="phone" id="phone" placeholder="Ex: (12) 1234-1234" required></label>
+				<div id="register-div"></div>
 			</form>
 
 			<div id="form-buttons">

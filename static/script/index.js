@@ -52,6 +52,7 @@ function filterproducts(category) {
 function filtervisibility() { //usa categorias de data.js
 	let menu = document.querySelector('#menu');
 	let menu_categories = menu.querySelector('#categories');
+	let filter = menu.querySelector('#price-filter');
 	let info = document.querySelector('#info');
 	let categories = menu_categories.getElementsByTagName('p');
 	let container = document.querySelector('.container');
@@ -63,6 +64,7 @@ function filtervisibility() { //usa categorias de data.js
 		container.style["grid-template-columns"] = "10vw 10vw 80vw";
 		info.className = "open";
 		menu.className = "open";
+		filter.className = "visible";
 		info.innerHTML = "Desenvolvido por: Álvaro, Giovanna e Marcelo.";
 		items.style.width = "75vw";
 		items.style.transition = "width 0s";
@@ -78,6 +80,7 @@ function filtervisibility() { //usa categorias de data.js
 		container.style["grid-template-columns"] = "7vw 3vw 90vw";
 		info.className = "close";
 		menu.className = "close";
+		filter.className = "invisible";
 		info.innerHTML = "";
 		items.style.width = "85vw";
 		items.style.transition = "width 0.1s linear 0.1s";
@@ -194,9 +197,65 @@ function checkout(cart) { //usa carrinho de data.js
 
 function login() {
 	let div = document.querySelector('#login-div');
-
+	
 	if(div.className == 'invisible')
 		div.className = 'visible';
 	else
+	{
 		div.className = 'invisible';
+		let register_div = div.querySelector('#register-div');
+		register_div.innerHTML = '';
+		let h3 = div.querySelector('#register-link');
+		h3.setAttribute("onclick", "signUp()");
+	}
+}
+
+function signUp() {
+	let div = document.querySelector('#login-div');
+	let form = div.querySelector('#form-user');
+	form.action = "/sign_up";
+	let h3 = form.querySelector('#register-link');
+	h3.removeAttribute("onclick");
+	let register_div = form.querySelector('#register-div');
+
+	let label = document.createElement('label');
+	label.innerHTML = 'Nome completo';
+	let input = document.createElement("input");
+	input.type = "text";
+	input.name = "name";
+	input.id = "name";
+	input.required = true;
+	label.appendChild(input);
+	register_div.appendChild(label);
+
+	label = document.createElement('label');
+	label.innerHTML = 'CPF';
+	input = document.createElement("input");
+	input.type = "tel";
+	input.name = "cpf";
+	input.id = "cpf";
+	input.required = true;
+	input.placeholder = "Ex: 123.123.123-12"
+	label.appendChild(input);
+	register_div.appendChild(label);
+
+	label = document.createElement('label');
+	label.innerHTML = 'Data de nascimento (opcional)';
+	input = document.createElement("input");
+	input.type = "date";
+	input.name = "birthday";
+	input.id = "birthday";
+	label.appendChild(input);
+	register_div.appendChild(label);
+
+	label = document.createElement('label');
+	label.innerHTML = 'Telefone';
+	input = document.createElement("input");
+	input.type = "tel";
+	input.name = "phone";
+	input.id = "phone";
+	input.required = true;
+	input.placeholder = "Ex: (12) 1234-1234"
+	label.appendChild(input);
+	register_div.appendChild(label);
 }

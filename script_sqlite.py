@@ -15,6 +15,7 @@ print('Banco de dados aberto com sucesso!')
 
 print('Tabela criada com sucesso!')'''
 
+
 '''data = [
 	(
 		1,
@@ -294,5 +295,20 @@ for product in data:
     conn.execute("""INSERT INTO products (id, name, category, price, img, description) VALUES (?, ?, ?, ?, ?, ?);""", product)
 
 conn.commit()'''
+
+
+'''conn.execute(""" CREATE TABLE IF NOT EXISTS users (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	name text NOT NULL,
+	email text UNIQUE NOT NULL,
+	password text NOT NULL,
+	cpf text NOT NULL,
+	birthday text,
+	phone text NOT NULL
+	); """)'''
+
+cursor = conn.execute("SELECT * FROM users")
+users = cursor.fetchall()
+print(users)
 
 conn.close()
