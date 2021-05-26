@@ -3,7 +3,7 @@ Trabalho Final - Desenvolvimento de Aplicações Para a Internet.
 Alunos: Álvaro, Giovanna e Marcelo.
 A aplicação consiste na simulação de um site de vendas. Esse site contém, necessariamente, três páginas:
 
-## Parte I:
+## Parte I - ENTREGUE:
 1. Página principal com apresentação de produtos
   a. Esta página deve conter a listagem de todos produtos disponíveis.
   b. Produtos fictícios, armazenados em uma variável JavaScript.
@@ -30,3 +30,10 @@ A aplicação consiste na simulação de um site de vendas. Esse site contém, n
 
 3. Implementar um cadastro para o usuário;
 4. Na página de detalhes de compra e dados de usuário, verificar se há um cadastro para o usuário. Se não, realiza-lo antes de prosseguir com pedido.
+
+
+## TO DO:
+1. index: a função de adicionar o produto ao carrinho (addproduct) usa data.js - eliminar essa dependêcia, já que está sendo utilizado o banco de dados.
+2. checkout: quando o usuário é novo, inserir no banco de dados e na sessão;
+3. summary: criar o modelo no banco para o pedido;
+4. Relatório com diagrama ER do banco de dados (para parte II).

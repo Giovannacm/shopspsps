@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 
+
 app = Flask( __name__ )
 app.secret_key = 'random string'
+
 
 @app.route("/", methods=['POST', 'GET'])
 def index():
@@ -23,26 +25,25 @@ def index():
 			cursor = conn.execute("SELECT * FROM products WHERE price BETWEEN ? AND ?", (min_price, max_price))
 
 		products = cursor.fetchall()
+		conn.close()
+
 		if 'user' in session:
-			return render_template("index.html", products=products, username=session['user'][0][1])
-		else:
-			return render_template("index.html", products=products)
+			return render_template("index.html", products=products, username=session['user'][0][1]) #user name
 	else:
 		cursor = conn.execute("SELECT * FROM products")
 		products = cursor.fetchall()
-		if 'user' in session:
-			return render_template("index.html", products=products, username=session['user'][0][1])
-		else:
-			return render_template("index.html", products=products)
+		conn.close()
 
-	conn.close()
+		if 'user' in session:
+			return render_template("index.html", products=products, username=session['user'][0][1]) #user name
+	
+	return render_template("index.html", products=products)
+
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
 	conn = sqlite3.connect('data.db')
-	cursor = conn.execute("SELECT * FROM products")
-	products = cursor.fetchall()
-
+	
 	if request.method == 'POST':
 		email = request.form.get('email')
 		password = request.form.get('password')
@@ -50,25 +51,33 @@ def login():
 		cursor = conn.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
 		user = cursor.fetchall()
 
-		if len(user) != 0:
-			name = user[0][1]
-			name = name.split(" ")[0]
-
-			session['user'] = user
-			return redirect(url_for('index'))
-		else:
+		if len(user) == 0:
 			error = "Email ou senha inválidos!"
-			return render_template("index.html", products=products, error=error)
-	else:
-		return redirect(url_for('index'))
 
+			cursor = conn.execute("SELECT * FROM products")
+			products = cursor.fetchall()
+
+			conn.close()
+
+			return render_template("index.html", products=products, error=error)
+		else:
+			session['user'] = user
+		
 	conn.close()
+
+	return redirect(url_for('index'))
+	
+
+@app.route('/logout')
+def logout() :
+	session.pop('user', None)
+
+	return redirect(url_for('index'))
+
 
 @app.route("/sign_up", methods=['POST', 'GET'])
 def sign_up():
 	conn = sqlite3.connect('data.db')
-	cursor = conn.execute("SELECT * FROM products")
-	products = cursor.fetchall()
 
 	if request.method == 'POST':
 		email = request.form.get('email')
@@ -81,26 +90,32 @@ def sign_up():
 		cursor = conn.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
 		user = cursor.fetchall()
 
-		if len(user) != 0:
+		if len(user) == 0: #se não tem ninguem com mesmo e-mail e senha, insere no banco, seleciona essa pessoa para colocar na sessão
 			conn.execute("""INSERT INTO users (name, email, password, cpf, birthday, phone) VALUES (?, ?, ?, ?, ?, ?);""", (name, email, password, cpf, birthday, phone))
 			conn.commit()
 
-		name = name.split(" ")[0]
-		session['user'] = user
-		return redirect(url_for('index'))
-	else:
-		return redirect(url_for('index'))
+			cursor = conn.execute("SELECT * FROM users WHERE email = ? AND password = ?", (email, password))
+			user = cursor.fetchall()
 
+		session['user'] = user
+	
 	conn.close()
+
+	return redirect(url_for('index'))
+
 
 @app.route("/checkout")
 def checkout():
+	if 'user' in session:
+		return render_template("checkout.html", user=session['user'][0])
 	return render_template("checkout.html")
+
 
 @app.route("/summary", methods=['POST', 'GET'])
 def summary():
 	if request.method == 'POST':
 		result = request.form
 		return render_template("summary.html", result=result)
+
 
 app.run(debug = True)

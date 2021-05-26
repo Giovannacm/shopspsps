@@ -26,13 +26,23 @@
 				<input id="input-search" type="text" placeholder="Pesquisar">
 			</div>
 
-			{% if username %}
-				<p id="login-info">Olá, <strong>{{ username }}</strong>!</p>
-			{% endif %}
+			<div id="user-login">
+				{% if username %}
+					<p id="login-info">Olá, <strong>{{ username }}</strong>!</p>
+				{% endif %}
 
-			<a id="login" onclick="login()">
-				<img src="{{ url_for('static', filename='icons/login.png')}}">
-			</a>
+				{% if not username %}
+					<a id="login" onclick="login()">
+						<img src="{{ url_for('static', filename='icons/login.png')}}">
+					</a>
+				{% endif %}
+
+				{% if username %}
+					<a id="logout" href="{{url_for('logout')}}">
+						<img src="{{ url_for('static', filename='icons/logout.png')}}">
+					</a>
+				{% endif %}
+			</div>
 		</div>
 
 		<div id="menu" class="open">
@@ -110,7 +120,7 @@
 			{% endfor %}
 		</div>
 
-		<div id="login-div" class="invisible">
+		<div id="login-div" class="{{"visible" if error else "invisible"}}">
 			<form id="form-user" id="form-data" action="{{url_for('login')}}" method='POST'>
 				{% if error %}
 				    <p id="login-info">{{ error }}</p>

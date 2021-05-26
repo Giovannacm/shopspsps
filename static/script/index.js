@@ -49,7 +49,7 @@ function filterproducts(category) {
 	}
 }
 
-function filtervisibility() { //usa categorias de data.js
+function filtervisibility() {
 	let menu = document.querySelector('#menu');
 	let menu_categories = menu.querySelector('#categories');
 	let filter = menu.querySelector('#price-filter');
@@ -123,7 +123,7 @@ function setPrice(object) {
 	p_price.innerHTML = 'R$' + object.value;
 }
 
-function addproduct(id) { //usa carrinho e produtos de data.js
+function addproduct(id) { //usa produtos de data.js
 	let item = document.querySelector('#item-' + id);
 	let p = item.querySelector('#cont-item-' + id);
 	
@@ -155,7 +155,7 @@ function addproduct(id) { //usa carrinho e produtos de data.js
 	cont2.innerHTML = aux.toString();
 }
 
-function removeproduct(id) { //usa carrinho de data.js
+function removeproduct(id) {
 	let item = document.querySelector('#item-' + id);
 	let p = item.querySelector('#cont-item-' + id);
 
@@ -190,16 +190,15 @@ function removeproduct(id) { //usa carrinho de data.js
 	cont2.innerHTML = aux.toString();
 }
 
-function checkout(cart) { //usa carrinho de data.js
-	let tosend = JSON.stringify(carrinho);
-	sessionStorage.setItem('cart', tosend);
-}
-
 function login() {
 	let div = document.querySelector('#login-div');
 	
 	if(div.className == 'invisible')
+	{
 		div.className = 'visible';
+		let form = div.querySelector('#form-user');
+		form.action = "/login";
+	}
 	else
 	{
 		div.className = 'invisible';
@@ -258,4 +257,9 @@ function signUp() {
 	input.placeholder = "Ex: (12) 1234-1234"
 	label.appendChild(input);
 	register_div.appendChild(label);
+}
+
+function checkout(cart) { //usa carrinho de data.js
+	let tosend = JSON.stringify(carrinho);
+	sessionStorage.setItem('cart', tosend);
 }

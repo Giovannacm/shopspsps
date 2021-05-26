@@ -67,15 +67,29 @@
 				<div id="user" class="item invisible">
 					<h1>Dados do usuário</h1>
 
-					<label>Nome completo<input type="text" name="name" id="name" required></label>
+					{% if user %}
+						<label>Nome completo<input type="text" name="name" id="name" value="{{ user[1] }}" required></label>
 
-					<label>CPF<input type="tel" id="cpf" name="cpf" placeholder="Ex: 123.123.123-12" required></label>
+						<label>CPF<input type="tel" id="cpf" name="cpf" placeholder="Ex: 123.123.123-12" value="{{ user[4] }}" required></label>
 
-					<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
+						<label>E-mail<input type="email" id="email" name="email" autocomplete="on" value="{{ user[2] }}" required></label>
 
-					<label>Data de nascimento (opcional)<input type="date" id="birthday" name="birthday"></label>
-					
-					<label>Telefone<input type="tel" name="phone" id="phone" placeholder="Ex: (12) 1234-1234" required></label>
+						<label>Data de nascimento (opcional)<input type="date" id="birthday" name="birthday" value="{{ user[5] }}"></label>
+						
+						<label>Telefone<input type="tel" name="phone" id="phone" placeholder="Ex: (12) 1234-1234" value="{{ user[6] }}" required></label>
+					{% else %}
+						<label>E-mail<input type="email" id="email" name="email" autocomplete="on" required></label>
+
+						<label>Senha<input type="password" name="password" required></label>
+
+						<label>Nome completo<input type="text" name="name" id="name" required></label>
+
+						<label>CPF<input type="tel" id="cpf" name="cpf" placeholder="Ex: 123.123.123-12" required></label>
+
+						<label>Data de nascimento (opcional)<input type="date" id="birthday" name="birthday"></label>
+						
+						<label>Telefone<input type="tel" name="phone" id="phone" placeholder="Ex: (12) 1234-1234" required></label>
+					{% endif %}
 				</div>
 
 				<div id="delivery" class="item invisible">
