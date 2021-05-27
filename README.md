@@ -34,6 +34,5 @@ A aplicação consiste na simulação de um site de vendas. Esse site contém, n
 
 ## TO DO:
 1. index: a função de adicionar o produto ao carrinho (addproduct) usa data.js - eliminar essa dependêcia, já que está sendo utilizado o banco de dados.
-2. checkout: quando o usuário é novo, inserir no banco de dados e na sessão;
-3. summary: criar o modelo no banco para o pedido;
-4. Relatório com diagrama ER do banco de dados (para parte II).
+2. summary: criar o modelo no banco para o pedido quando clicar no botão de confirmação;
+3. Relatório com diagrama ER do banco de dados (para parte II).

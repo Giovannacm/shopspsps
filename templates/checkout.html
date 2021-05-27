@@ -95,19 +95,35 @@
 				<div id="delivery" class="item invisible">
 					<h1>Dados de entrega</h1>
 				
-					<label>Endereço<input type="text" name="address" id="address" required></label>
+					{% if address %}
+						<label>Endereço<input type="text" name="address" id="address" value="{{ address[0][2] }}" required></label>
 
-					<label>Número<input type="text" name="number" id="number" required></label>
+						<label>Número<input type="text" name="number" id="number" value="{{ address[0][3] }}" required></label>
 
-					<label>Complemento (opcional)<input type="text" name="complement" id="complement"></label>
+						<label>Complemento (opcional)<input type="text" name="complement" id="complement" value="{{ address[0][4] }}"></label>
 
-					<label>Bairro<input type="text" name="district" id="district" required></label>
+						<label>Bairro<input type="text" name="district" id="district" value="{{ address[0][5] }}" required></label>
 
-					<label>Cidade<input type="text" name="city" id="city" required></label>
+						<label>Cidade<input type="text" name="city" id="city" value="{{ address[0][6] }}" required></label>
 
-					<label>Estado<input type="text" name="state" id="state" required></label>
+						<label>Estado<input type="text" name="state" id="state" value="{{ address[0][7] }}" required></label>
 
-					<label>CEP<input type="text" name="cep" id="cep" placeholder="Ex: 12345-123" required></label>
+						<label>CEP<input type="text" name="cep" id="cep" placeholder="Ex: 12345-123" value="{{ address[0][8] }}" required></label>
+					{% else %}
+						<label>Endereço<input type="text" name="address" id="address" required></label>
+
+						<label>Número<input type="text" name="number" id="number" required></label>
+
+						<label>Complemento (opcional)<input type="text" name="complement" id="complement"></label>
+
+						<label>Bairro<input type="text" name="district" id="district" required></label>
+
+						<label>Cidade<input type="text" name="city" id="city" required></label>
+
+						<label>Estado<input type="text" name="state" id="state" required></label>
+
+						<label>CEP<input type="text" name="cep" id="cep" placeholder="Ex: 12345-123" required></label>
+					{% endif %}
 
 					<label>Tipo de entrega<input type="text" name="delivery-method" id="delivery-method" required list="delivery-methods" oninput='loadDeliveryInfo()'></label>
 					<datalist id="delivery-methods">

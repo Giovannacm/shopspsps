@@ -153,10 +153,13 @@ body {
 }
 
 #confirm-order {
+	text-decoration: none;
+	color: black;
 	font-size: 18px;
 	background-color: #2ad172;
 	border: 1px solid #2ad172;
 	border-radius: 5px;
+	padding: 5px 10px;
 }
 
 #confirm-order:hover {

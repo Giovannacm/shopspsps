@@ -307,7 +307,22 @@ conn.commit()'''
 	phone text NOT NULL
 	); """)'''
 
-cursor = conn.execute("SELECT * FROM users")
+
+'''conn.execute(""" CREATE TABLE IF NOT EXISTS adresses (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	user_id integer NOT NULL,
+	address text NOT NULL,
+	a_number text NOT NULL,
+	complement text NOT NULL,
+	district text,
+	city text NOT NULL,
+	state text NOT NULL,
+	zip_code text NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id)
+	); """)'''
+
+
+cursor = conn.execute("SELECT * FROM adresses")
 users = cursor.fetchall()
 print(users)
 
