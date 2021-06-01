@@ -1,5 +1,5 @@
-var cart = [];
 let categorias = ["Compra", "Usuário", "Entrega", "Pagameto"];
+var cart = [];
 let delivery_time;
 
 function selected(object) {
@@ -50,7 +50,7 @@ function loadcart(products) {
         p.className = 'product';
         
         let img = document.createElement('img');
-        img.src = "static/" + products[i].product.img; //voltando na pasta
+        img.src = products[i].product.img;
         p.appendChild(img);
         tr.appendChild(td);
 
@@ -246,40 +246,15 @@ function loadPaymentInfo() {
 }
 
 function summary() {
-    var order = {};
-
-    order.cart = cart;
-
-    let usuario = {
-        name: document.querySelector('#name').value,
-        cpf: document.querySelector('#cpf').value,
-        email: document.querySelector('#email').value,
-        birthday: document.querySelector('#birthday').value,
-        gender: document.querySelector('#gender-f').checked == true ? 'f' : 'm',
-        phone: document.querySelector('#phone').value
-    }
-    order.user = usuario;
-    
-    let entrega = {
-        address: document.querySelector('#address').value,
-        number: document.querySelector('#number').value,
-        complement: document.querySelector('#complement').value,
-        district: document.querySelector('#district').value,
-        city: document.querySelector('#city').value,
-        state: document.querySelector('#state').value,
-        cep: document.querySelector('#cep').value,
+    var order = {
+        cart: cart,
         delivery_method: document.querySelector('#delivery-method').value,
-        time: delivery_time
-    }
-    order.delivery = entrega;
-
-    let pagamento = {
+        time: delivery_time,
         payment_method: document.querySelector('#payment-method').value,
         total: gettotal(cart).toFixed(2)
     }
-    order.payment = pagamento;
-
-    let tosend = JSON.stringify(order);
+   
+   let tosend = JSON.stringify(order);
     sessionStorage.setItem('order', tosend);
 }
 

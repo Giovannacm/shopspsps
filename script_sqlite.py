@@ -321,6 +321,24 @@ conn.commit()'''
 	FOREIGN KEY(user_id) REFERENCES users(id)
 	); """)'''
 
+conn.execute(""" CREATE TABLE IF NOT EXISTS orders (
+	id integer PRIMARY KEY AUTOINCREMENT,
+	user_id integer NOT NULL,
+	address_id integer NOT NULL,
+	delivery_method text NOT NULL,
+	delivery_deadline integer NOT NULL,
+	total real NOT NULL,
+	payment_method text NOT NULL,
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(address_id) REFERENCES adresses(id)
+	); """)
+
+conn.execute(""" CREATE TABLE IF NOT EXISTS order_products (
+	order_id integer NOT NULL,
+	product_id integer NOT NULL,
+	FOREIGN KEY(order_id) REFERENCES orders(id),
+	FOREIGN KEY(product_id) REFERENCES products(id)
+	); """)
 
 cursor = conn.execute("SELECT * FROM adresses")
 users = cursor.fetchall()

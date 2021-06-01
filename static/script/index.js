@@ -28,8 +28,7 @@ function selected(object) {
 
 function filterproducts(category) {
 	let items = document.querySelector('#items');
-	console.log(items.childNodes);
-
+	
 	for(var child=items.firstChild; child!==null; child=child.nextSibling) {
 		if(child.nodeName == 'DIV') {
 			let item_category = child.querySelector('.item-category').innerHTML;
@@ -122,12 +121,12 @@ function setPrice(object) {
 
 	p_price.innerHTML = 'R$' + object.value;
 }
-
-function addproduct(id) { //usa produtos de data.js
+				
+function addproduct(id) {
 	let item = document.querySelector('#item-' + id);
-	let p = item.querySelector('#cont-item-' + id);
+	let p_cont = item.querySelector('#cont-item-' + id);
 	
-	let cont = parseInt(p.innerHTML);
+	let cont = parseInt(p_cont.innerHTML);
 
 	if(cont < 99)
 	{
@@ -136,7 +135,14 @@ function addproduct(id) { //usa produtos de data.js
 
 		if(incart == undefined)
 		{
-			let product = produtos.find(object => object.id == id);
+			let product = {
+				id: id,
+				name: item.querySelector('.item-name').innerHTML,
+				category: item.querySelector('.item-category').innerHTML,
+				price: parseFloat(item.querySelector('.item-price').innerHTML.slice(2)), //desconsiderando o R$
+				img: item.querySelector('.item-image').src,
+				description: item.querySelector('.item-description').innerHTML
+			}
 			carrinho.push({quantity: 1, product: product});
 		}
 		else
@@ -145,7 +151,7 @@ function addproduct(id) { //usa produtos de data.js
 		}
 	}
 
-	p.innerHTML = cont.toString();
+	p_cont.innerHTML = cont.toString();
 
 	let cont2 = document.querySelector('#cont-cart');
 	let aux = 0;
@@ -259,7 +265,7 @@ function signUp() {
 	register_div.appendChild(label);
 }
 
-function checkout(cart) { //usa carrinho de data.js
+function checkout(cart) { //manda o carrinho para a summary
 	let tosend = JSON.stringify(carrinho);
 	sessionStorage.setItem('cart', tosend);
 }

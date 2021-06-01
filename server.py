@@ -166,7 +166,8 @@ def summary():
 
 @app.route("/confirm", methods=['POST', 'GET'])
 def confirm():
+	#quando o usuario clicar no botão confirmar pedido, criar a tabela do pedido com os atributos e, para cada pedido, criar as linhas na order_products
+	
 	return redirect(url_for('index'))
-
 
 app.run(debug = True)

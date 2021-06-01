@@ -106,9 +106,15 @@
 			{% for product in products %}
 				<div id="item-{{ product[0] }}" class="item visible">
 					<p class="item-category">{{ product[2] }}</p>
-					<img src="static/{{ product[4] }}">
-					<h1>{{ product[1] }} - R${{ product[3] }}</h1>
-					<p>{{ product[5] }}</p>
+					<img class="item-image" src="static/{{ product[4] }}">
+
+					<div style="display: flex; flex-direction: row;">
+						<h1 class="item-name">{{ product[1] }}</h1>
+						<h1 class="item-price">R${{ product[3] }}</h1>
+					</div>
+
+					<p class="item-description">{{ product[5] }}</p>
+					
 					<div id="buttons">
 						<a class="more" onclick="addproduct({{ product[0] }})"><img src="{{ url_for('static', filename='icons/more.png') }}"></a>
 
@@ -152,6 +158,5 @@
 		</a>
 	</div>
 </body>
-<script src="{{ url_for('static', filename='script/data.js')}}"></script>
 <script src="{{ url_for('static', filename='script/index.js')}}"></script>
 </html>
