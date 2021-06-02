@@ -179,7 +179,7 @@ function loadDeliveryInfo() {
 
     for(var i = 0; i < opts.length; i++) {
      	if (val === 'Transportadora') {
-        	p.innerHTML = 'Prazo para entrega: ' + (delivery_time +2) + ' dias.';
+        	p.innerHTML = 'Prazo para entrega: ' + (delivery_time) + ' dias.';
         	p.classList.remove('invisible');
     		p.classList.add('visible');
       	} 
@@ -189,7 +189,7 @@ function loadDeliveryInfo() {
     		p.classList.add('visible');
       	}
       	else if (val === 'Retirar na loja') {
-        	p.innerHTML = 'Retirar no endereço: Rua Bosque Florido, 960, Pirapozinho - São Paulo em: ' + (Math.floor(Math.random() * 8) + 2) + ' dias.';
+        	p.innerHTML = 'Retirar no endereço: Rua Bosque Florido, 960, Pirapozinho - São Paulo em: ' + (delivery_time) + ' dias.';
         	p.classList.remove('invisible');
     		p.classList.add('visible');
       	}
@@ -245,16 +245,46 @@ function loadPaymentInfo() {
     }
 }
 
+function loadAddress(object) {
+    var data = object.text.replace(/(\t|\n)/gm, "").split(",");
+    
+    document.querySelector('#address').value = data[0].split(":")[1].slice(1);
+    document.querySelector('#number').value = data[1].slice(1);
+    document.querySelector('#complement').value = data[2].slice(1);
+    document.querySelector('#district').value = data[3].slice(1);
+    document.querySelector('#city').value = data[4].slice(1);
+    document.querySelector('#state').value = data[5].slice(1);
+    document.querySelector('#cep').value = data[6].slice(1, -1);
+}
+
 function summary() {
     var order = {
         cart: cart,
-        delivery_method: document.querySelector('#delivery-method').value,
-        time: delivery_time,
-        payment_method: document.querySelector('#payment-method').value,
-        total: gettotal(cart).toFixed(2)
+        user: {
+            name: document.querySelector('#name').value,
+            cpf: document.querySelector('#cpf').value,
+            email: document.querySelector('#email').value,
+            birthday: document.querySelector('#birthday').value,
+            phone: document.querySelector('#phone').value
+        },
+        delivery: {
+            address: document.querySelector('#address').value,
+            number: document.querySelector('#number').value,
+            complement: document.querySelector('#complement').value,
+            district: document.querySelector('#district').value,
+            city: document.querySelector('#city').value,
+            state: document.querySelector('#state').value,
+            cep: document.querySelector('#cep').value,
+            delivery_method: document.querySelector('#delivery-method').value,
+            time: delivery_time
+        },
+        payment: {
+            total: gettotal(cart).toFixed(2),
+            method: document.querySelector('#payment-method').value
+        }
     }
    
-   let tosend = JSON.stringify(order);
+    let tosend = JSON.stringify(order);
     sessionStorage.setItem('order', tosend);
 }
 

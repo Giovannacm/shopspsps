@@ -160,12 +160,9 @@ body {
 	border: 1px solid #2ad172;
 	border-radius: 5px;
 	padding: 5px 10px;
+	cursor: pointer;
 }
 
 #confirm-order:hover {
 	box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-}
-
-#confirm-order::disabled {
-	background-color: #aaa;
 }

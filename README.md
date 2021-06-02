@@ -29,9 +29,9 @@ A aplicação consiste na simulação de um site de vendas. Esse site contém, n
 2. Adicionar filtragens/ordenações por preço;
 
 3. Implementar um cadastro para o usuário;
+
 4. Na página de detalhes de compra e dados de usuário, verificar se há um cadastro para o usuário. Se não, realiza-lo antes de prosseguir com pedido.
 
 
 ## TO DO:
-1. summary: criar o modelo no banco para o pedido quando clicar no botão de confirmação;
-2. Relatório com diagrama ER do banco de dados (para parte II).
+1. Relatório com diagrama ER do banco de dados (para parte II).

@@ -265,7 +265,10 @@ function signUp() {
 	register_div.appendChild(label);
 }
 
-function checkout(cart) { //manda o carrinho para a summary
-	let tosend = JSON.stringify(carrinho);
-	sessionStorage.setItem('cart', tosend);
+function checkout(object, cart) { //manda o carrinho para a summary
+	if(carrinho.length != 0) {
+		object.href =  'checkout';
+		let tosend = JSON.stringify(carrinho);
+		sessionStorage.setItem('cart', tosend);
+	}
 }

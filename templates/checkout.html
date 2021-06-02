@@ -95,6 +95,17 @@
 				<div id="delivery" class="item invisible">
 					<h1>Dados de entrega</h1>
 				
+					{% if address|length > 1 %}
+					<p style="display: flex; flex-direction: row; justify-content: center; margin: 0px;">
+						{% for address_i in address %}
+							<a class="address_item" onclick="loadAddress(this)">
+								<strong>Endereço {{loop.index0 + 1}}: </strong>
+								{{address_i[2]}}, {{address_i[3]}}, {{(address_i[4])}}, {{address_i[5]}}, {{address_i[6]}}, {{address_i[7]}}, {{address_i[8]}}.
+							</a>
+						{% endfor %}
+					</p>
+					{% endif %}
+
 					{% if address %}
 						<label>Endereço<input type="text" name="address" id="address" value="{{ address[0][2] }}" required></label>
 

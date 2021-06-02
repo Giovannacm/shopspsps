@@ -11,9 +11,7 @@ print('Banco de dados aberto com sucesso!')
 	price real NOT NULL,
 	img text NOT NULL,
 	description text NOT NULL
-	); """)
-
-print('Tabela criada com sucesso!')'''
+	); """)'''
 
 
 '''data = [
@@ -296,7 +294,6 @@ for product in data:
 
 conn.commit()'''
 
-
 '''conn.execute(""" CREATE TABLE IF NOT EXISTS users (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	name text NOT NULL,
@@ -306,7 +303,6 @@ conn.commit()'''
 	birthday text,
 	phone text NOT NULL
 	); """)'''
-
 
 '''conn.execute(""" CREATE TABLE IF NOT EXISTS adresses (
 	id integer PRIMARY KEY AUTOINCREMENT,
@@ -321,7 +317,7 @@ conn.commit()'''
 	FOREIGN KEY(user_id) REFERENCES users(id)
 	); """)'''
 
-conn.execute(""" CREATE TABLE IF NOT EXISTS orders (
+'''conn.execute(""" CREATE TABLE IF NOT EXISTS orders (
 	id integer PRIMARY KEY AUTOINCREMENT,
 	user_id integer NOT NULL,
 	address_id integer NOT NULL,
@@ -331,17 +327,31 @@ conn.execute(""" CREATE TABLE IF NOT EXISTS orders (
 	payment_method text NOT NULL,
 	FOREIGN KEY(user_id) REFERENCES users(id),
 	FOREIGN KEY(address_id) REFERENCES adresses(id)
-	); """)
+	); """)'''
 
-conn.execute(""" CREATE TABLE IF NOT EXISTS order_products (
+'''conn.execute(""" CREATE TABLE IF NOT EXISTS order_products (
 	order_id integer NOT NULL,
 	product_id integer NOT NULL,
+	quantity integer NOT NULL,
 	FOREIGN KEY(order_id) REFERENCES orders(id),
 	FOREIGN KEY(product_id) REFERENCES products(id)
-	); """)
+	); """)'''
+
+
+cursor = conn.execute("SELECT * FROM users")
+users = cursor.fetchall()
+print("\n", users)
 
 cursor = conn.execute("SELECT * FROM adresses")
-users = cursor.fetchall()
-print(users)
+adresses = cursor.fetchall()
+print("\n", adresses)
+
+cursor = conn.execute("SELECT * FROM orders")
+orders = cursor.fetchall()
+print("\n", orders)
+
+cursor = conn.execute("SELECT * FROM order_products")
+order_products = cursor.fetchall()
+print("\n", order_products)
 
 conn.close()
